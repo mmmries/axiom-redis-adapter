@@ -1,29 +1,6 @@
-# Axiom::Redis::Adapter
+An experiment to support redis as a backend for Ruby Object Mapper.
+My main goals right now are:
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'axiom-redis-adapter'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install axiom-redis-adapter
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+* Learn [Ruby Object Mapper](http://rom-rb.org)
+* Support Basic Operations required to use ROM in a Rails app
+* Map Redis transactions to a ROM session?
