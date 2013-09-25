@@ -1,6 +1,6 @@
 module Axiom
   module Adapter
-    module Redis
+    class Redis
       VERSION = "0.0.1"
     end
   end

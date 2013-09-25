@@ -1,12 +1,14 @@
 require 'spec_helper'
+require 'support/user'
 
 describe Axiom::Adapter::Redis do
-  let(:rom){ ROM::Environment.setup(redis: 'redis://localhost:6379/11') }
+  let(:rom){ ROM::Environment.setup(redis: 'redis://localhost:6379/0') }
+  let(:redis){ ::Redis.new(host: 'localhost', port: '6379') }
   
   before :each do
     rom.schema do
       base_relation :users do
-        repository :memory
+        repository :redis
 
         attribute :id,   Integer
         attribute :name, String
@@ -21,6 +23,11 @@ describe Axiom::Adapter::Redis do
         model User
       end
     end
+
+    redis.flushdb
+
+    redis.set "users-1", Marshal.dump({id: 1, name: 'John'})
+    redis.set "users-2", Marshal.dump({id: 2, name: 'Jane'})
   end
 
   it "can find users" do
