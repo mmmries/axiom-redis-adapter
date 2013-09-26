@@ -33,8 +33,13 @@ module Axiom::Adapter
     def insert(relation, tuples)
       tuples.each do |tuple|
         hash = attributes(relation.header, tuple)
-        key = "#{relation.name}-#{hash[:id]}"
-        redis.set key, Marshal.dump(hash)
+        redis.set key(relation, tuple), Marshal.dump(hash)
+      end
+    end
+
+    def delete(relation, tuples)
+      tuples.each do |tuple|
+        redis.del key(relation, tuple)
       end
     end
 
@@ -43,6 +48,11 @@ module Axiom::Adapter
 
     def attributes(header, tuple)
       Hash[header.map(&:name).zip(tuple)]
+    end
+
+    def key(relation, tuple)
+      hash = attributes(relation.header, tuple)
+      "#{relation.name}-#{hash[:id]}"
     end
   end
 end

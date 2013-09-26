@@ -4,8 +4,7 @@ require 'support/rom_user_context'
 describe Axiom::Adapter::Redis do
   include_context "rom_user"
 
-  it "can find create a user" do
-
+  it "can create a user" do
     rom.session do |s|
       new_user = s[:users].new(name: 'Benedict', id: 3)
       s[:users].save(new_user)
