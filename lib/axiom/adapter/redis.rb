@@ -30,7 +30,19 @@ module Axiom::Adapter
       end
     end
 
+    def insert(relation, tuples)
+      tuples.each do |tuple|
+        hash = attributes(relation.header, tuple)
+        key = "#{relation.name}-#{hash[:id]}"
+        redis.set key, Marshal.dump(hash)
+      end
+    end
+
     private
     attr_reader :schema, :redis
+
+    def attributes(header, tuple)
+      Hash[header.map(&:name).zip(tuple)]
+    end
   end
 end
