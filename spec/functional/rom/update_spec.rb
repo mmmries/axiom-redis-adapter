@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'support/rom_user_context'
 
-describe Axiom::Adapter::Redis do
+describe "Update" do
   include_context "rom_user"
 
   it "can update a user" do
