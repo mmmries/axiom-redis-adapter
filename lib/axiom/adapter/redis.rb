@@ -9,7 +9,7 @@ module Axiom::Adapter
     uri_scheme :redis
 
     def initialize(uri)
-      @redis = ::Redis.new(host: uri.host, port: uri.port)
+      @redis = ::Redis.new(host: uri.host, port: uri.port, db: uri.path[1..-1].to_i)
       @schema = {}
     end
 
